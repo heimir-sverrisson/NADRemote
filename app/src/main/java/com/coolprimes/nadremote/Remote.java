@@ -1,6 +1,7 @@
 package com.coolprimes.nadremote;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -49,8 +51,9 @@ public class Remote extends AppCompatActivity {
             urlConnection = (HttpURLConnection) url.openConnection();
             InputStream response = urlConnection.getInputStream();
         } catch (Exception e){
+            final String message = e.getLocalizedMessage();
+            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
             Log.d(TAG_NADREMOTE, "Exception: " + e);
-            System.exit(1);
         } finally {
             urlConnection.disconnect();
         }
